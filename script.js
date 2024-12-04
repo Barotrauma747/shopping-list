@@ -3,6 +3,7 @@ const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
+const itemFilter = document.querySelector('#filter');
 
 function addItem(e) {
     e.preventDefault();
@@ -22,7 +23,10 @@ function addItem(e) {
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button);
 
+    //Add li to the DOM
     itemList.appendChild(li);
+
+    checkUI(); //we check the UI if we have any items and then execute the checkUI()-function accordingly - if we don't do that here, we won't have the "clear all" button even after we added items
 
     itemInput.value = ''; //so the input field clears after submit
 }
@@ -59,7 +63,28 @@ function clearItems() {
 //Explanation: we take the entire item List and then make sure it as a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
 
 
+//Check UI-Function to check the "state" of the app
+function checkUI() {
+
+    const items = itemList.querySelectorAll('li');
+
+    if (items.length === 0) {
+        clearBtn.style.display = 'none';
+        itemFilter.style.display = 'none';
+    } else {
+        clearBtn.style.display = 'block';
+        itemFilter.style.display = 'block';
+    }
+}
+/*Explanation:
+First we select all list-items - we have to do it here and NOT in the global scope - because if it's defined then it's already defined. That means if we add a list item later on then this won't change and therefor our checkUI-function wouldn't be triggered (or not triggered in this case)
+Then we change the CSS-Style of the button according to the length of our nodeList tha we got with the "itemList.querySelectorAll" method. If the length is 0 then we have no items and therefor the button should disappear
+*/
+
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
+
+
+checkUI(); //check when the page loads
