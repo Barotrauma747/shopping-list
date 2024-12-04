@@ -2,6 +2,7 @@
 const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
+const clearBtn = document.querySelector('#clear');
 
 function addItem(e) {
     e.preventDefault();
@@ -50,6 +51,15 @@ function removeItem(e) {
 //And if all of that is true, then we want to remove the parent element of the parent element of our target - we target (click) the icon - the parent element of the icon is the button-element and the parent element of the button is the li-element
 
 
+function clearItems() {
+    while (itemList.firstChild) {
+        itemList.removeChild(itemList.firstChild);
+    }
+}
+//Explanation: we take the entire item List and then make sure it as a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
+
+
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
+clearBtn.addEventListener('click', clearItems);
