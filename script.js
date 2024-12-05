@@ -48,8 +48,11 @@ function createIcon(classes) {
 
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
-        if (confirm('Are you sure?'))
+        if (confirm('Are you sure?')) {
         e.target.parentElement.parentElement.remove();
+
+        checkUI();
+        }
     }
 }
 //Explanation: the with the e.target we look at what we click - then we go for the parent element and check the class list of that element - if that element contains 'remove-item' (which our button-class in html does) then that's what we're choosing.
