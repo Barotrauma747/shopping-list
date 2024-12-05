@@ -48,6 +48,7 @@ function createIcon(classes) {
 
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
+        if (confirm('Are you sure?'))
         e.target.parentElement.parentElement.remove();
     }
 }
@@ -77,7 +78,8 @@ function checkUI() {
     }
 }
 /*Explanation:
-First we select all list-items - we have to do it here and NOT in the global scope - because if it's defined then it's already defined. That means if we add a list item later on then this won't change and therefor our checkUI-function wouldn't be triggered (or not triggered in this case)
+First we select all list-items - we have to do it here and NOT in the global scope - because if it's defined then it's already defined. That means if we add a list item later on then this won't change and therefor our checkUI-function wouldn't be triggered
+
 Then we change the CSS-Style of the button according to the length of our nodeList tha we got with the "itemList.querySelectorAll" method. If the length is 0 then we have no items and therefor the button should disappear
 */
 
