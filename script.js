@@ -57,14 +57,18 @@ function removeItem(e) {
 }
 //Explanation: the with the e.target we look at what we click - then we go for the parent element and check the class list of that element - if that element contains 'remove-item' (which our button-class in html does) then that's what we're choosing.
 //And if all of that is true, then we want to remove the parent element of the parent element of our target - we target (click) the icon - the parent element of the icon is the button-element and the parent element of the button is the li-element
+//Then we added an additional if-part that wrapped the removal method - we added an alert prompt via the "confirm()" method
+//finally the checkUI function was called so we can remove the "clear all" and "filter" elements after everything is gone
 
 
 function clearItems() {
     while (itemList.firstChild) {
         itemList.removeChild(itemList.firstChild);
     }
+    checkUI();
 }
 //Explanation: we take the entire item List and then make sure it as a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
+//Added a call for checkUI() after the while loop so we can remove the buttons if nothing is there anymore
 
 
 //Check UI-Function to check the "state" of the app
