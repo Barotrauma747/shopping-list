@@ -90,10 +90,39 @@ First we select all list-items - we have to do it here and NOT in the global sco
 Then we change the CSS-Style of the button according to the length of our nodeList tha we got with the "itemList.querySelectorAll" method. If the length is 0 then we have no items and therefor the button should disappear
 */
 
+//My Filter-Solution
+function filterItems (e) {
+
+    const items = itemList.querySelectorAll('li');
+    //const itemName = items[0].textContent;
+    
+    itemFilter.textContent = e.target.value;
+    const input = itemFilter.textContent.toLowerCase();
+
+    items.forEach(function(item) {
+
+        const itemName = item.textContent.trimStart().toLowerCase();
+
+        if (!itemName.startsWith(input)) {
+            item.style.display = 'none';
+        } else {
+            item.style.display = 'flex';
+        }
+    })
+    console.log(input);
+}
+
+//Logic: check for whatever is typed down - if the innerText of an element does NOT start with that then change the css style to .style.display = 'none'
+
+
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
 
+//My Filter-Solution EventListener
+itemFilter.addEventListener('keyup', filterItems);
+
 
 checkUI(); //check when the page loads
+
