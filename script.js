@@ -94,7 +94,6 @@ Then we change the CSS-Style of the button according to the length of our nodeLi
 function filterItems (e) {
 
     const items = itemList.querySelectorAll('li');
-    //const itemName = items[0].textContent;
     
     itemFilter.textContent = e.target.value;
     const input = itemFilter.textContent.toLowerCase();
@@ -109,18 +108,35 @@ function filterItems (e) {
             item.style.display = 'flex';
         }
     })
-    console.log(input);
+    //console.log(input);
+    checkUI();
 }
 
-//Logic: check for whatever is typed down - if the innerText of an element does NOT start with that then change the css style to .style.display = 'none'
+/*
+TM-Solution
+function filterItems (e) {
+    const items = itemList.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
 
+    items.forEach((item) => {
+        const itemName = item.firstChild.textContent.toLowerCase();
+
+        if(itemName.indexOf(text) != -1) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = '';
+        }
+    });
+}
+*/
+//Explanation for differences:
+//item.firstChild.textContent => I'm just additionally targeting the first Child and then go for the text content
+//if(itemName.indexOf(text) != -1) => so the text-const can be passed in and checked if it matches any of the itemName strings - if it does then it's true, if it doesn't then it's false - therefor: If it's true then it won't be "-1" and then we display that item in flex
 
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
-
-//My Filter-Solution EventListener
 itemFilter.addEventListener('keyup', filterItems);
 
 
