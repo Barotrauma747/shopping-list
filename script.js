@@ -16,19 +16,24 @@ function onAddItemSubmit(e) {
         return;
     }
 
+    addItemToDOM(newItem);
+
+    checkUI(); //we check the UI if we have any items and then execute the checkUI()-function accordingly - if we don't do that here, we won't have the "clear all" button even after we added items
+
+    itemInput.value = ''; //so the input field clears after submit
+}
+
+function addItemToDOM(item) {
+
     //Create list item
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(item));
 
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button);
 
     //Add li to the DOM
     itemList.appendChild(li);
-
-    checkUI(); //we check the UI if we have any items and then execute the checkUI()-function accordingly - if we don't do that here, we won't have the "clear all" button even after we added items
-
-    itemInput.value = ''; //so the input field clears after submit
 }
 
 function createButton(classes) {
