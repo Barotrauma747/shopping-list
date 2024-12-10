@@ -16,10 +16,10 @@ function onAddItemSubmit(e) {
         return;
     }
 
-    //Create item DOM element
+    //Create item DOM element with the newItem const as argument
     addItemToDOM(newItem);
 
-    //Add item to local storage
+    //Add item to local storage with the newItem const as argument
     addItemToStorage(newItem);
 
     checkUI(); //we check the UI if we have any items and then execute the checkUI()-function accordingly - if we don't do that here, we won't have the "clear all" button even after we added items
@@ -31,7 +31,7 @@ function addItemToDOM(item) {
 
     //Create list item
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(item));
+    li.appendChild(document.createTextNode(item)); //the argument had to be changed from "newItem" to "item" because now it takes the argument from the addItemToDOM function - which takes the argument from the function call in the onAddItemSubmit function
 
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button);
@@ -41,19 +41,21 @@ function addItemToDOM(item) {
 }
 
 function addItemToStorage(item) {
-    let itemsFromStorage;
+    let itemsFromStorage; //represents the array of items from local storage
     
+    //Check if anything is in the local storage
     if(localStorage.getItem('items') === null) {
-        itemsFromStorage = [];
+        itemsFromStorage = []; //'items' is the key of the key/value pair - I could call it 'poop' if I wanted to. If there are none then we set the array to empty
     } else {
-        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+        itemsFromStorage = JSON.parse(localStorage.getItem('items')); //without the "JSON.parse()" it would just give us a string instead of an array. but this way it gives us the array (which is called "itemsFromStorage") with the items inside
     }
 
-    // Add new Item to array
+    // Add the new Item to our array (itemsFromStorage)
     itemsFromStorage.push(item);
 
     // Convert to JSON string and set to local storage
     localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+    //this turns it back into a string and puts it into local storage - we can't put an array into local storage - only strings - so that's why we're converting back-and-forth
 }
 
 function createButton(classes) {
