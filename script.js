@@ -16,7 +16,11 @@ function onAddItemSubmit(e) {
         return;
     }
 
+    //Create item DOM element
     addItemToDOM(newItem);
+
+    //Add item to local storage
+    addItemToStorage(newItem);
 
     checkUI(); //we check the UI if we have any items and then execute the checkUI()-function accordingly - if we don't do that here, we won't have the "clear all" button even after we added items
 
@@ -34,6 +38,22 @@ function addItemToDOM(item) {
 
     //Add li to the DOM
     itemList.appendChild(li);
+}
+
+function addItemToStorage(item) {
+    let itemsFromStorage;
+    
+    if(localStorage.getItem('items') === null) {
+        itemsFromStorage = [];
+    } else {
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+    }
+
+    // Add new Item to array
+    itemsFromStorage.push(item);
+
+    // Convert to JSON string and set to local storage
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
 
 function createButton(classes) {
