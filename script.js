@@ -112,7 +112,7 @@ function getItemsFromStorage() {
 
 function onClickItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
-        removeItem(e.target.parentElement);
+        removeItem(e.target.parentElement.parentElement);
     }
 }
 
