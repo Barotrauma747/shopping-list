@@ -197,6 +197,9 @@ function filterItems (e) {
 //item.firstChild.textContent => I'm just additionally targeting the first Child and then go for the text content
 //if(itemName.indexOf(text) != -1) => so the text-const can be passed in and checked if it matches any of the itemName strings - if it does then it's true, if it doesn't then it's false - therefor: If it's true then it won't be "-1" and then we display that item in flex
 
+
+//Initialize app
+function init() {
 // Event Listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
@@ -204,6 +207,10 @@ clearBtn.addEventListener('click', clearItems);
 itemFilter.addEventListener('keyup', filterItems);
 document.addEventListener('DOMContentLoaded', displayItems);
 
-
 checkUI(); //check when the page loads
+}
+
+init();
+
+
 
