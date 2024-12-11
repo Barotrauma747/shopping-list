@@ -57,6 +57,11 @@ function createIcon(classes) {
 
 
 function addItemToStorage(item) {
+    
+    const itemsFromStorage = getItemsFromStorage(); //this was implemented to replace the commented out section below
+
+    /*This is the initial way we did it before the getItemsFromSTorage function was implemented
+
     let itemsFromStorage; //represents the array of items from local storage
     
     //Check if anything is in the local storage
@@ -65,6 +70,7 @@ function addItemToStorage(item) {
     } else {
         itemsFromStorage = JSON.parse(localStorage.getItem('items')); //without the "JSON.parse()" it would just give us a string instead of an array. but this way it gives us the array (which is called "itemsFromStorage") with the items inside
     }
+    */
 
     // Add the new Item to our array (itemsFromStorage)
     itemsFromStorage.push(item);
@@ -74,6 +80,22 @@ function addItemToStorage(item) {
     //this turns it back into a string and puts it into local storage - we can't put an array into local storage - only strings - so that's why we're converting back-and-forth
 }
 
+
+function getItemsFromStorage() {
+
+    //The "let" and "if" section is copied from the addItemToStorage function
+    let itemsFromStorage;
+    
+    //Check if anything is in the local storage
+    if(localStorage.getItem('items') === null) {
+        itemsFromStorage = []; 
+    } else {
+        itemsFromStorage = JSON.parse(localStorage.getItem('items')); 
+    }
+
+    return itemsFromStorage; // This way we have the items to work with
+
+}
 
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
