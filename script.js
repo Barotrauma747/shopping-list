@@ -110,11 +110,14 @@ function getItemsFromStorage() {
 
 }
 
+
 function onClickItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
         removeItem(e.target.parentElement.parentElement);
     }
 }
+//Explanation: First we check if it is the delete button by checking wether it contains the 'remove-item' class. If it is then we remove the entire item by calling our removeItem() function. The item is the parent of our targets parent element - the parent element of our target is the "x" button - and the parent of that is the actual item we want to remove
+
 
 function removeItem(item) {
     if (confirm('Are you sure?')) {
@@ -127,6 +130,9 @@ function removeItem(item) {
         checkUI();
     }
 }
+//Explanation: First we set a confirm alert - if its confirmed then we remove the item - important here is that the "item" we pass as argument for the function is the item that comes from the call in the onClickItem function (so: e.target.parentElement.parentElement) - that's why we can just use the default remove() method on it - this only removes it from the DOM
+//Then we remove the item from storage by calling a function we then had to write. There we're passing the text content of our item as argument
+
 
 function removeItemFromStorage(item) {
     let itemsFromStorage = getItemsFromStorage();
@@ -137,6 +143,9 @@ function removeItemFromStorage(item) {
     // Re-set to local storage
     localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
+//Explanation: First we get the items from storage (we need to use "let" here so we can work with those items). Then we have to filter which item we actually want to remove - the filter-method returns a new array with all the elements that are NOT equal to the item (the "i" is just what we call it - could name it poop as well). So the "itemsFromStorage" array then has all the items we still want in our local storage
+//Then we have to return that array back to local storage - therefor we use localStorage.setItem() and use 'items' as our key and "itemsFromStorage" as our values. 
+//Of course in order to get them there we have to JSON.stringify that array
 
 /* - old removeItem function before we had to remove the items from the Storage too
 
@@ -165,8 +174,9 @@ function clearItems() {
     
     checkUI();
 }
-//Explanation: we take the entire item List and then make sure it as a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
+//Explanation: we take the entire item List and then make sure it has a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
 //Added a call for checkUI() after the while loop so we can remove the buttons if nothing is there anymore
+//Added a clear from localStorage section where we call the removeItem() function on our local storage and only pass the key 'items' - that way all the items get removed from the local storage
 
 
 //Check UI-Function to check the "state" of the app
