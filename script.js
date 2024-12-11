@@ -128,6 +128,16 @@ function removeItem(item) {
     }
 }
 
+function removeItemFromStorage(item) {
+    let itemsFromStorage = getItemsFromStorage();
+
+    //Filter out item to be removed
+    itemsFromStorage = itemsFromStorage.filter((i) => i !== item);
+
+    // Re-set to local storage
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+}
+
 /* - old removeItem function before we had to remove the items from the Storage too
 
 function removeItem(e) {
@@ -222,7 +232,7 @@ function filterItems (e) {
 function init() {
 // Event Listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
-//itemList.addEventListener('click', removeItem);
+//itemList.addEventListener('click', removeItem); --> for the old removeItem function
 itemList.addEventListener('click', onClickItem);
 clearBtn.addEventListener('click', clearItems);
 itemFilter.addEventListener('keyup', filterItems);
