@@ -110,6 +110,26 @@ function getItemsFromStorage() {
 
 }
 
+function onClickItem(e) {
+    if (e.target.parentElement.classList.contains('remove-item')) {
+        removeItem(e.target.parentElement);
+    }
+}
+
+function removeItem(item) {
+    if (confirm('Are you sure?')) {
+        //Remove item from DOM
+        item.remove();
+
+        //Remove item from storage
+        removeItemFromStorage(item.textContent);
+
+        checkUI();
+    }
+}
+
+/* - old removeItem function before we had to remove the items from the Storage too
+
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
         if (confirm('Are you sure?')) {
@@ -123,7 +143,7 @@ function removeItem(e) {
 //And if all of that is true, then we want to remove the parent element of the parent element of our target - we target (click) the icon - the parent element of the icon is the button-element and the parent element of the button is the li-element
 //Then we added an additional if-part that wrapped the removal method - we added an alert prompt via the "confirm()" method
 //finally the checkUI function was called so we can remove the "clear all" and "filter" elements after everything is gone
-
+*/
 
 function clearItems() {
     while (itemList.firstChild) {
@@ -202,7 +222,8 @@ function filterItems (e) {
 function init() {
 // Event Listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
-itemList.addEventListener('click', removeItem);
+//itemList.addEventListener('click', removeItem);
+itemList.addEventListener('click', onClickItem);
 clearBtn.addEventListener('click', clearItems);
 itemFilter.addEventListener('keyup', filterItems);
 document.addEventListener('DOMContentLoaded', displayItems);
