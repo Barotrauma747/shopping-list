@@ -9,11 +9,14 @@ function displayItems() {
     const itemsFromStorage = getItemsFromStorage();
 
     itemsFromStorage.forEach(item => addItemToDOM(item));
+
+    checkUI(); //We have to add this so we can see the filter and clear all fields again
 }
 //Explanation: The eventListener listens to DOMContentLoaded on the document itself - so if the page is loading it's checking for the DOM content/the items currently in local storage.
 //Then we go and get the items from the local storage again with our getItemsFromStorage() function and attach it to a const so we can use them.
 //Finally we loop through each item and add that item to our DOM so they are displayed again
 //Since at this point in the course we haven't implemented a function to remove these items from the local storage all the items from the storage will always be displayed on page-reload
+
 
 function onAddItemSubmit(e) {
     e.preventDefault();
