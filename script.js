@@ -159,6 +159,10 @@ function clearItems() {
     while (itemList.firstChild) {
         itemList.removeChild(itemList.firstChild);
     }
+
+    //Clear from localStorage
+    localStorage.removeItem('items');
+    
     checkUI();
 }
 //Explanation: we take the entire item List and then make sure it as a firstChild (so the first li) - as long as that is true we remove that li-element. And we're doing that in a while-loop and therefor clear the entire list with the "clear all" button
