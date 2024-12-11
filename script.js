@@ -189,6 +189,7 @@ itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
 itemFilter.addEventListener('keyup', filterItems);
+document.addEventListener('DOMContentLoaded', displayItems);
 
 
 checkUI(); //check when the page loads
