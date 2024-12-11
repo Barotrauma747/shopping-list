@@ -40,6 +40,22 @@ function addItemToDOM(item) {
     itemList.appendChild(li);
 }
 
+
+function createButton(classes) {
+    const button = document.createElement('button');
+    button.className = classes;
+    const icon = createIcon('fa-solid fa-xmark');
+    button.appendChild(icon);
+    return button;
+}
+
+function createIcon(classes) {
+    const icon = document.createElement('i');
+    icon.className = classes;
+    return icon;
+}
+
+
 function addItemToStorage(item) {
     let itemsFromStorage; //represents the array of items from local storage
     
@@ -56,20 +72,6 @@ function addItemToStorage(item) {
     // Convert to JSON string and set to local storage
     localStorage.setItem('items', JSON.stringify(itemsFromStorage));
     //this turns it back into a string and puts it into local storage - we can't put an array into local storage - only strings - so that's why we're converting back-and-forth
-}
-
-function createButton(classes) {
-    const button = document.createElement('button');
-    button.className = classes;
-    const icon = createIcon('fa-solid fa-xmark');
-    button.appendChild(icon);
-    return button;
-}
-
-function createIcon(classes) {
-    const icon = document.createElement('i');
-    icon.className = classes;
-    return icon;
 }
 
 
