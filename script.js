@@ -42,6 +42,8 @@ function onAddItemSubmit(e) {
         itemToEdit.remove();
         isEditMode = false;
     }
+    //Explanation: We check if isEditMode is true (so if anything is currentyl in edit mode because that function turned it to true). Then we select that specific item (important - this time it needs the dot infront of the "edit-mode"). Then we remove the item from Storage - and since it's just text in the storage we only take the text content. Then we remove the 'edit-mode' class from that item and finally we remove the entire item. Then we set the isEditMode back to false. After that the rest of the code here just keeps running
+    //In short: Instead of actually changing the item we just remove it and then let it be replaced by a new item - which is easy because that is just what the rest of the following code already does
 
     //Create item DOM element with the newItem const as argument
     addItemToDOM(newItem);
