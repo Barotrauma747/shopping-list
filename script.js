@@ -233,6 +233,7 @@ function clearItems() {
 
 //Check UI-Function to check the "state" of the app
 function checkUI() {
+    itemInput.value = '';
 
     const items = itemList.querySelectorAll('li');
 
@@ -243,11 +244,22 @@ function checkUI() {
         clearBtn.style.display = 'block';
         itemFilter.style.display = 'block';
     }
+
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+    formBtn.style.backgroundColor = '#333'
+
+    isEditMode = false;
 }
 /*Explanation:
+The checkUI() function is basically our "reset" code that sets everything back to the state where it should be once an action is completed
+
 First we select all list-items - we have to do it here and NOT in the global scope - because if it's defined then it's already defined. That means if we add a list item later on then this won't change and therefor our checkUI-function wouldn't be triggered
 
 Then we change the CSS-Style of the button according to the length of our nodeList tha we got with the "itemList.querySelectorAll" method. If the length is 0 then we have no items and therefor the button should disappear
+
+New addition1: ItemInput.value = ''; this is so that after any change the input value (so whatever text is in the input field) gets cleared
+
+New Addition2: the formBtn-section: After an item-edit we have to reset the green "Update Item" button back to the grey "Add Item" button. So we basically just change the inner HTML and the background Color back to what it initially was. Then we change the isEditMode back to false
 */
 
 //My Filter-Solution
