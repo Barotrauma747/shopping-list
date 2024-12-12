@@ -5,7 +5,9 @@ const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
 const itemFilter = document.querySelector('#filter');
 const formBtn = itemForm.querySelector('button');
-let isEditMode = false;
+let isEditMode = false; //this is set to "let" so we can reassign it later - that's necessary here!
+
+
 
 function displayItems() {
     const itemsFromStorage = getItemsFromStorage();
@@ -120,7 +122,12 @@ function onClickItem(e) {
         setItemToEdit(e.target);
     }
 }
-//Explanation: First we check if it is the delete button by checking wether it contains the 'remove-item' class. If it is then we remove the entire item by calling our removeItem() function. The item is the parent of our targets parent element - the parent element of our target is the "x" button - and the parent of that is the actual item we want to remove
+/*Explanation: The function itself is just a handeler for whatever we click on - the function code inside is what we actually want to do to the specific items we click on:
+
+1. With the first statement we want to remove an item when we click the "x". we check if it is the delete button by checking wether it contains the 'remove-item' class. If it is then we remove the entire item by calling our removeItem() function. The item is the parent of our targets parent element - the parent element of our target is the "x" button - and the parent of that is the actual item we want to remove
+
+2. With the second function (setItemToEdit) we target the list item itself so we can edit it. The "e.target" is what we're clicking on and therefor will be the argument that's passed into the setItemToEdit() function 
+*/
 
 
 function setItemToEdit(item) {
@@ -135,7 +142,22 @@ function setItemToEdit(item) {
     formBtn.style.backgroundColor = '#228B22';
     itemInput.value = item.textContent;
 }
+/*Explanation:
+1. We set the isEditMode to true - that's why we needed the global variable to "let" otherwise we couldn't change it here
 
+2. - here we have to jump over the "itemList" section - that comes later:
+
+2.1 We take our item and add the 'edit-mode' class to it, so now the list-item turns grey (due to the CSS-class of 'edit-mode' which makes the text grey)
+
+2.2 We then want to change the "Add Item" button to a different color and text so we use the formBtn (which only includes that "Add Item" button but not the Clear All button or the list buttons). There we change the inner HTML to a different class that changes the "+" to a "pen"-icon and we also change the text from "Add Item" to "Update Item". We also change the background color to green.
+
+2.3 we take the itemInput.value - so what the input-field shows (therefor the "value") and change it to whatever the text content of the item we click on shows.
+
+3. Now we do the itemList section of the code: Why do we need this and why does it have to be before the the other code? We use it to remove the 'edit-mode'-class (and therefor the grey font) from every single list item - so after these lines run all of the list items will look regular. And we do this by selecting all the li-items from our itemList const and then run a forEach loop on every single li-item (the "i" in the loop is custom so I could call it "poop" if I wanted)
+
+So now everytime I click on one item it first removes the edit-mode class from all the items - so if I pressed on a different item before then this one turns back to regular - and then the one we just clicked on now gets the edit-mode added back on
+
+*/
 
 function removeItem(item) {
     if (confirm('Are you sure?')) {
