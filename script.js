@@ -132,7 +132,7 @@ function setItemToEdit(item) {
 
     item.classList.add =('edit-mode');
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>  Update Item';
-    formBtnstyle.backgroundColor = '#228B22'
+    formBtn.style.backgroundColor = '#228B22';
     itemInput.value = item.textContent;
 }
 
