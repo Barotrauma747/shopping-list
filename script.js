@@ -4,6 +4,8 @@ const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
 const itemFilter = document.querySelector('#filter');
+const formBtn = itemForm.querySelector('button');
+let isEditMode = false;
 
 function displayItems() {
     const itemsFromStorage = getItemsFromStorage();
@@ -114,9 +116,25 @@ function getItemsFromStorage() {
 function onClickItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
         removeItem(e.target.parentElement.parentElement);
+    } else {
+        setItemToEdit(e.target);
     }
 }
 //Explanation: First we check if it is the delete button by checking wether it contains the 'remove-item' class. If it is then we remove the entire item by calling our removeItem() function. The item is the parent of our targets parent element - the parent element of our target is the "x" button - and the parent of that is the actual item we want to remove
+
+
+function setItemToEdit(item) {
+    isEditMode = true;
+
+    itemList
+    .querySelectorAll('li')
+    .forEach((i) => i.classList.remove('edit-mode'));
+
+    item.classList.add =('edit-mode');
+    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>  Update Item';
+    formBtnstyle.backgroundColor = '#228B22'
+    itemInput.value = item.textContent;
+}
 
 
 function removeItem(item) {
