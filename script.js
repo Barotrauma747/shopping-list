@@ -41,9 +41,15 @@ function onAddItemSubmit(e) {
         itemToEdit.classList.remove('edit-mode');
         itemToEdit.remove();
         isEditMode = false;
+    } else {
+        if (checkIfItemExists(newItem)) {
+            alert('That item already exists');
+            return;
+        }
     }
     //Explanation: We check if isEditMode is true (so if anything is currentyl in edit mode because that function turned it to true). Then we select that specific item (important - this time it needs the dot infront of the "edit-mode"). Then we remove the item from Storage - and since it's just text in the storage we only take the text content. Then we remove the 'edit-mode' class from that item and finally we remove the entire item. Then we set the isEditMode back to false. After that the rest of the code here just keeps running
     //In short: Instead of actually changing the item we just remove it and then let it be replaced by a new item - which is easy because that is just what the rest of the following code already does
+    //The "else" section was added after - it checks for duplicates. We add newItem as argument which then gets placed in the checkIfItemExists function. If it does then we get an alert and then - IMPORTANT - "return" so the item doesn't get added because the rest of the code in the onAddItemSubmit function doesn't get executed
 
     //Create item DOM element with the newItem const as argument
     addItemToDOM(newItem);
