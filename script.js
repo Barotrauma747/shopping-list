@@ -78,6 +78,7 @@ function createButton(classes) {
     return button;
 }
 
+
 function createIcon(classes) {
     const icon = document.createElement('i');
     icon.className = classes;
@@ -140,6 +141,18 @@ function onClickItem(e) {
 
 2. With the second function (setItemToEdit) we target the list item itself so we can edit it. The "e.target" is what we're clicking on and therefor will be the argument that's passed into the setItemToEdit() function 
 */
+
+
+function checkIfItemExists(item) {
+    const itemsFromStorage = getItemsFromStorage();
+
+    if (itemsFromStorage.includes(item)) {
+        return true;
+    } else {
+        return false;
+    } 
+}
+//Explanation: First we get our items from Storage - since it's an array I can use the ".includes" method. If it does then it returns true, if not it returns false
 
 
 function setItemToEdit(item) {
